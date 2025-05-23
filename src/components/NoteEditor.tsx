@@ -1,8 +1,9 @@
 // src/components/NoteEditor.tsx
 import { useEffect, useState } from 'react';
-import { Note } from '../db/notesDb';
+import type { Note } from '../db/notesDb';
 import { db } from '../db/notesDb';
 import ReactMarkdown from 'react-markdown';
+
 interface NoteEditorProps {
   note: Note;
   onClose: () => void;
@@ -30,22 +31,6 @@ const NoteEditor = ({ note, onClose }: NoteEditorProps) => {
   }, [title, content]);
 
   return (
-    <input
-  type="text"
-  placeholder="Search notes..."
-  className="mt-4 mb-4 p-2 border w-full rounded"
-  onChange={(e) => {
-    const query = e.target.value.toLowerCase();
-    setNotes(prev =>
-      prev.filter(
-        note =>
-          note.title.toLowerCase().includes(query) ||
-          note.content.toLowerCase().includes(query)
-      )
-    );
-  }}
-/>
-
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
       <div className="bg-white p-6 rounded shadow max-w-xl w-full">
         <div className="flex justify-between items-center mb-4">
@@ -68,11 +53,12 @@ const NoteEditor = ({ note, onClose }: NoteEditorProps) => {
         />
 
         <p className="text-sm text-gray-500 mt-2">{status}</p>
+
+        <h3 className="mt-6 mb-2 font-semibold">Preview</h3>
+        <div className="prose prose-sm max-w-none bg-gray-50 border p-3 rounded">
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </div>
       </div>
-      <h3 className="mt-6 mb-2 font-semibold">Preview</h3>
-<div className="prose prose-sm max-w-none bg-gray-50 border p-3 rounded">
-  <ReactMarkdown>{content}</ReactMarkdown>
-</div>
     </div>
   );
 };

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import NoteEditor from './NoteEditor';
 import { createNote, getAllNotes } from '../services/noteService';
-import { Note } from '../db/notesDb';
+import type { Note } from '../db/notesDb';
 
 const NoteList = () => {
   const [notes, setNotes] = useState<Note[]>([]);

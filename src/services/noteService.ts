@@ -1,5 +1,6 @@
 // src/services/noteService.ts
-import { db, Note } from '../db/notesDb';
+import { db } from '../db/notesDb';
+import type { Note } from '../db/notesDb';
 import { v4 as uuidv4 } from 'uuid';
 
 export const createNote = async (title = '', content = ''): Promise<Note> => {

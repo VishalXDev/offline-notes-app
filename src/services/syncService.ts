@@ -1,15 +1,15 @@
 // src/services/syncService.ts
 import { db } from '../db/notesDb';
-import { Note } from '../db/notesDb';
 
 const API_URL = 'http://localhost:3001/notes';
 
 export const syncNotes = async () => {
-  const unsyncedNotes = await db.notes.where('synced').equals(false).toArray();
+  // ✅ Avoid Dexie's .equals(false) — safely filter after .toArray()
+  const allNotes = await db.notes.toArray();
+  const unsyncedNotes = allNotes.filter(note => note.synced === false);
 
   for (const note of unsyncedNotes) {
     try {
-      // Check if it already exists on server
       const res = await fetch(`${API_URL}/${note.id}`);
       const exists = res.ok;
 
@@ -22,7 +22,7 @@ export const syncNotes = async () => {
         body: JSON.stringify(note),
       });
 
-      // Mark as synced
+      // ✅ Update note as synced
       await db.notes.update(note.id, { synced: true });
     } catch (err) {
       console.error(`Failed to sync note ${note.id}`, err);

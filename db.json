@@ -1,3 +1,25 @@
 {
-  "notes": []
+  "notes": [
+    {
+      "id": "a6e94fb4-9f9c-47ab-83b4-e55234cec422",
+      "title": "Cooking Book",
+      "content": "Recipe of foods here\n",
+      "updatedAt": "2025-05-23T04:48:00.062Z",
+      "synced": false
+    },
+    {
+      "id": "a6e94fb4-9f9c-47ab-83b4-e55234cec422",
+      "title": "Untitled",
+      "content": "",
+      "updatedAt": "2025-05-23T04:43:49.953Z",
+      "synced": false
+    },
+    {
+      "id": "30bb6dd4-741e-48ee-b471-5cdd9218d33f",
+      "title": "Fav Songs",
+      "content": "list of songs and gazal here",
+      "updatedAt": "2025-05-23T04:48:25.602Z",
+      "synced": false
+    }
+  ]
 }
