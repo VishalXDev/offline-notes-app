@@ -1,4 +1,3 @@
-// src/components/NoteList.tsx
 import { useEffect, useState } from 'react';
 import NoteEditor from './NoteEditor';
 import { createNote, getAllNotes } from '../services/noteService';
@@ -15,7 +14,7 @@ const NoteList = () => {
 
   const handleNewNote = async () => {
     await createNote('Untitled', '');
-    loadNotes(); // Refresh list
+    loadNotes();
   };
 
   useEffect(() => {

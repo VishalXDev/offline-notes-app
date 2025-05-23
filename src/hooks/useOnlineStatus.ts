@@ -1,4 +1,3 @@
-// src/hooks/useOnlineStatus.ts
 import { useEffect, useState } from 'react';
 
 const useOnlineStatus = () => {

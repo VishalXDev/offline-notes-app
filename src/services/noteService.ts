@@ -1,4 +1,3 @@
-// src/services/noteService.ts
 import { db } from '../db/notesDb';
 import type { Note } from '../db/notesDb';
 import { v4 as uuidv4 } from 'uuid';

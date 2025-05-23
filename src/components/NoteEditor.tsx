@@ -1,8 +1,7 @@
-// src/components/NoteEditor.tsx
-import { useEffect, useState } from 'react';
-import type { Note } from '../db/notesDb';
-import { db } from '../db/notesDb';
-import ReactMarkdown from 'react-markdown';
+import { useEffect, useState } from "react";
+import type { Note } from "../db/notesDb";
+import { db } from "../db/notesDb";
+import ReactMarkdown from "react-markdown";
 
 interface NoteEditorProps {
   note: Note;
@@ -12,7 +11,7 @@ interface NoteEditorProps {
 const NoteEditor = ({ note, onClose }: NoteEditorProps) => {
   const [title, setTitle] = useState(note.title);
   const [content, setContent] = useState(note.content);
-  const [status, setStatus] = useState('Synced');
+  const [status, setStatus] = useState("Synced");
 
   useEffect(() => {
     const timeout = setTimeout(async () => {
@@ -24,18 +23,20 @@ const NoteEditor = ({ note, onClose }: NoteEditorProps) => {
         synced: false,
       };
       await db.notes.put(updated);
-      setStatus('Unsynced (Saved Locally)');
+      setStatus("Unsynced (Saved Locally)");
     }, 500);
 
-    return () => clearTimeout(timeout); // debounce
-  }, [title, content]);
+    return () => clearTimeout(timeout);
+  }, [note, title, content]);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
       <div className="bg-white p-6 rounded shadow max-w-xl w-full">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Edit Note</h2>
-          <button onClick={onClose} className="text-red-600 hover:underline">Close</button>
+          <button onClick={onClose} className="text-red-600 hover:underline">
+            Close
+          </button>
         </div>
 
         <input
@@ -62,5 +63,4 @@ const NoteEditor = ({ note, onClose }: NoteEditorProps) => {
     </div>
   );
 };
-
 export default NoteEditor;
