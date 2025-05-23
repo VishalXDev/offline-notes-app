@@ -1,4 +1,3 @@
-// src/services/syncService.ts
 import { db } from "../db/notesDb";
 
 const API_URL = "http://localhost:3001/notes";
@@ -6,7 +5,6 @@ const API_URL = "http://localhost:3001/notes";
 export const syncNotes = async () => {
   console.log("Syncing started...");
 
-  // 1. Get unsynced notes and sort them by updatedAt (latest first)
   const allNotes = await db.notes.toArray();
   const unsyncedNotes = allNotes
     .filter((note) => note.synced === false)
@@ -14,8 +12,6 @@ export const syncNotes = async () => {
       (a, b) =>
         new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     );
-
-  // 2. Sync new or updated notes
   for (const note of unsyncedNotes) {
     try {
       const res = await fetch(`${API_URL}/${note.id}`);
@@ -40,17 +36,14 @@ export const syncNotes = async () => {
       console.error(`Sync error for ${note.id}`, err);
     }
   }
-
-  // 3. Sync deletions
   const deleted = await db.deletedNotes.toArray();
 
   for (const item of deleted) {
     try {
       const res = await fetch(`${API_URL}/${item.id}`, { method: "DELETE" });
-
       if (!res.ok) throw new Error("Delete failed");
 
-      await db.deletedNotes.delete(item.id); // Clean up after successful deletion
+      await db.deletedNotes.delete(item.id);
     } catch (err) {
       console.error(`Failed to delete ${item.id}`, err);
     }

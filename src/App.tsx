@@ -1,15 +1,17 @@
 import './App.css';
 import NoteList from './components/NoteList';
 import useOnlineStatus from './hooks/useOnlineStatus';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { syncNotes } from './services/syncService';
 
 function App() {
   const isOnline = useOnlineStatus();
+  const [syncStatus, setSyncStatus] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOnline) {
-      syncNotes();
+      setSyncStatus("Syncing...");
+      syncNotes().then(() => setSyncStatus("All notes synced!"));
     }
   }, [isOnline]);
 
@@ -22,11 +24,14 @@ function App() {
           }`}
         ></span>
         <p className="text-sm text-gray-600">
-          {isOnline ? 'Online — syncing enabled' : 'Offline — working locally'}
+          {isOnline ? 'Online' : 'Offline'}
         </p>
+        {syncStatus && isOnline && (
+          <p className="ml-4 text-sm text-blue-600">{syncStatus}</p>
+        )}
       </div>
 
-      <h1 className="text-3xl font-bold">Offline Notes App</h1>
+      <h1 className="text-3xl font-bold mb-4">Offline Notes App</h1>
       <NoteList />
     </div>
   );
