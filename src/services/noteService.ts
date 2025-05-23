@@ -14,6 +14,11 @@ export const createNote = async (title = '', content = ''): Promise<Note> => {
   return newNote;
 };
 
+export const deleteNote = async (id: string): Promise<void> => {
+  await db.notes.delete(id);
+  await db.deletedNotes.put({ id }); // Track for backend sync
+};
+
 export const getAllNotes = async (): Promise<Note[]> => {
   return await db.notes.orderBy('updatedAt').reverse().toArray();
 };
