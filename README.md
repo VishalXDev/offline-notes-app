@@ -1,26 +1,36 @@
-# Offline Notes App 📝
+# 📝 Offline Notes App
 
-A markdown-based offline-first notes app built with React + IndexedDB.
+This is a basic note-taking app that works even when you're offline. You can create, edit, and delete notes — and when you come back online, the app will sync everything to a backend server automatically.
 
-## Features
+---
 
-- Create, edit, delete markdown notes
-- Full offline support using Dexie.js (IndexedDB)
-- Syncs to mock API when online (via `json-server`)
-- Shows sync status
-- Live markdown preview
-- Responsive and lightweight UI
+## ✨ Features
 
-## Stack
+- Create, edit, and delete notes
+- Supports markdown with live preview
+- Works offline using IndexedDB (via Dexie)
+- Syncs automatically when you're online
+- Shows sync status (Synced or Unsynced)
+- Clean and mobile-friendly UI using Tailwind CSS
 
-- React + Vite + TypeScript
-- Dexie.js for offline storage
-- Tailwind CSS
-- json-server as mock backend
-- react-markdown for live preview
+---
 
-## Setup
+## 🛠️ Tech Stack
+
+- React + TypeScript
+- Vite
+- Dexie.js (for offline IndexedDB)
+- json-server (mock backend)
+- react-markdown (for markdown rendering)
+
+---
+
+## ▶️ How to Run the App
+
+### 1. Install everything
 
 ```bash
 npm install
-npm run dev
+
+2. Start the backend (json-server)
+npx json-server --watch db.json --port 3001

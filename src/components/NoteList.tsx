@@ -50,12 +50,15 @@ const NoteList = () => {
       <input
         type="text"
         placeholder="Search notes..."
+        aria-label="Search notes"
         className="border rounded px-3 py-1 w-full my-4"
         onChange={handleSearch}
       />
 
       <div className="grid gap-4">
-        {filteredNotes.length === 0 && <p className="text-gray-500">No notes found.</p>}
+        {filteredNotes.length === 0 && (
+          <p className="text-gray-500">No notes found.</p>
+        )}
 
         {filteredNotes.map((note) => (
           <div
@@ -69,7 +72,7 @@ const NoteList = () => {
             <p className="text-sm text-gray-600 mt-1">
               Updated: {new Date(note.updatedAt).toLocaleString()}
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-400 italic">
               {note.synced ? "Synced" : "Unsynced"}
             </p>
             <button
